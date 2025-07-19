@@ -18,6 +18,9 @@ class WritersAPIUpdate(generics.UpdateAPIView):
     queryset = Writers.objects.all()
     serializer_class = WritersSerializer
 
+class WritersAPIDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Writers.objects.all()
+    serializer_class = WritersSerializer
 
 # class WritersAPIView(APIView):
 #     def get(self, request):
