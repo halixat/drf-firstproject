@@ -16,10 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from writers.views import WritersAPIView
+from writers.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/writerslist/', WritersAPIView.as_view()),
-    path('api/v1/writerslist/<int:pk>/', WritersAPIView.as_view())
+    path('api/v1/writerslist/', WritersAPIList.as_view()),
+    path('api/v1/writerslist/<int:pk>/', WritersAPIUpdate.as_view())
 ]
