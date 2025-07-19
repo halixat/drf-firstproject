@@ -20,7 +20,6 @@ from writers.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/writerslist/', WritersAPIList.as_view()),
-    path('api/v1/writerslist/<int:pk>/', WritersAPIUpdate.as_view()),
-    path('api/v1/writersdetail/<int:pk>/', WritersAPIDetailView.as_view()),
+    path('api/v1/writerslist/', WritersViewSet.as_view({'get': 'list'})),
+    path('api/v1/writerslist/<int:pk>/', WritersViewSet.as_view({'put': 'update'})),
 ]

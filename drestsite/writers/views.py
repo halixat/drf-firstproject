@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import generics, viewsets
 from django.shortcuts import render
 from django.forms import model_to_dict
 from rest_framework.response import Response
@@ -9,62 +9,22 @@ from .serializers import WritersSerializer
 
 
 
-class WritersAPIList(generics.ListCreateAPIView):
+class WritersViewSet(viewsets.ModelViewSet):
     queryset = Writers.objects.all()
     serializer_class = WritersSerializer
 
 
-class WritersAPIUpdate(generics.UpdateAPIView):
-    queryset = Writers.objects.all()
-    serializer_class = WritersSerializer
 
-class WritersAPIDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Writers.objects.all()
-    serializer_class = WritersSerializer
+# class WritersAPIList(generics.ListCreateAPIView):
+#     queryset = Writers.objects.all()
+#     serializer_class = WritersSerializer
 
-# class WritersAPIView(APIView):
-#     def get(self, request):
-#         w = Writers.objects.all()
-#         return Response({'posts': WritersSerializer(w, many=True).data})
-    
-#     def post(self, request):
-#         serializer = WritersSerializer(data=request.data)
-#         serializer.is_valid(raise_exception=True)
-#         serializer.save()
 
-#         return Response({'post': serializer.data})
-    
-#     def put(self, request, *args, **kwargs):
-#         pk = kwargs.get("pk", None)
+# class WritersAPIUpdate(generics.UpdateAPIView):
+#     queryset = Writers.objects.all()
+#     serializer_class = WritersSerializer
 
-#         if not pk:
-#             return Response({"error": "Method PUT not allowed"})
-        
-#         try:
-#             instance = Writers.objects.get(pk=pk)
-#         except:
-#             return Response({"error": "Object does not exists"})
-        
-#         serializer = WritersSerializer(data=request.data, instance=instance)
-#         serializer.is_valid(raise_exception=True)
-#         serializer.save()
-#         return Response({"post": serializer.data})
-    
-#     def delete(self, request, *args, **kwargs):
-#         pk = kwargs.get("pk", None)
 
-#         if not pk:
-#             return Response({"error": "Method Delete not allowed"})
-        
-#         try:
-#             instance = Writers.objects.get(pk=pk)
-#         except:
-#             return Response({"error": "Object does not exists"})
-        
-#         instance.delete()
-        
-#         return Response({"post": "deleted post " + str(pk)})
-
-# class WritersAPIView(generics.ListAPIView):
+# class WritersAPIDetailView(generics.RetrieveUpdateDestroyAPIView):
 #     queryset = Writers.objects.all()
 #     serializer_class = WritersSerializer
