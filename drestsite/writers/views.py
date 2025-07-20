@@ -11,8 +11,15 @@ from .serializers import WritersSerializer
 
 
 class WritersViewSet(viewsets.ModelViewSet):
-    queryset = Writers.objects.all()[0:3]
     serializer_class = WritersSerializer
+
+    def get_queryset(self):
+        pk = self.kwargs.get("pk")
+
+        if not pk:
+            return Writers.objects.all()[0:3]
+        
+        return Writers.objects.filter(pk=pk)
 
     @action(methods=['get'], detail = True)
     def category(self, request, pk=None):
