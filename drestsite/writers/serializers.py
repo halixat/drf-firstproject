@@ -6,6 +6,8 @@ from .models import Writers
 
 
 class WritersSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
     class Meta:
         model = Writers
         fields = "__all__"

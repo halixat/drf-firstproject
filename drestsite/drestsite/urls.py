@@ -22,27 +22,9 @@ from rest_framework import routers
 
 
 
-class MyCustomRouter(routers.SimpleRouter):
-    routes = [
-        routers.Route(url=r'^{prefix}/$',
-                      mapping={'get': 'list'},
-                      name='{basename}-list',
-                      detail=False,
-                      initkwargs={'suffix': 'List'}),
-        routers.Route(url=r'^{prefix}/{lookup}/$',
-                      mapping={'get': 'retrieve'},
-                      name='{basename}-detail',
-                      detail=True,
-                      initkwargs={'suffix': 'Detail'})
-    ]
-
-router = MyCustomRouter()
-router.register(r'writers', WritersViewSet, basename='writers')
-print(router.urls)
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/', include(router.urls)),
-    # path('api/v1/writerslist/', WritersViewSet.as_view({'get': 'list'})),
-    # path('api/v1/writerslist/<int:pk>/', WritersViewSet.as_view({'put': 'update'})),
+    path('api/v1/writers/', WritersAPIList.as_view()),
+    path('api/v1/writers/<int:pk>/', WritersAPIUpdate.as_view()),
+    path('api/v1/writersdelete/<int:pk>/', WritersAPIDestroy.as_view()),
 ]
